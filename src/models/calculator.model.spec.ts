@@ -2,6 +2,8 @@
 import { CalculatorModel } from './calculator.model';
 import { ICalculatorModel } from '../interfaces/calculator-model.interface';
 import { NumericKeys } from '../enums/numeric-keys.enum';
+import { OperatorKeys } from '../enums/operator-keys.enum';
+import exp = require('constants');
 
 describe('CalculatorModel', (): void => {
 
@@ -63,4 +65,25 @@ describe('CalculatorModel', (): void => {
   
   });
 
+  it('should display `+` when the `+` key is pressed', (): void => {
+
+    const calculator: ICalculatorModel = new CalculatorModel();
+  
+    calculator.pressOperatorKey(OperatorKeys.PLUS);
+    const displayValue: string = calculator.display();
+  
+    expect(displayValue).toEqual('+');
+  
+  });
+
+  it('should evaluate one addition operation', (): void => {
+    const calculator: ICalculatorModel = new CalculatorModel();
+    calculator.pressNumericKey(NumericKeys.ONE);
+    calculator.pressOperatorKey(OperatorKeys.PLUS);
+    calculator.pressNumericKey(NumericKeys.TWO);
+    calculator.evaluate();
+
+    const displayValue: string = calculator.display();
+    expect(displayValue).toEqual('3');
+  });
 });

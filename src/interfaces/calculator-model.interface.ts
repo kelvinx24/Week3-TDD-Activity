@@ -16,4 +16,7 @@ export interface ICalculatorModel {
   // returns the contents of the calculator's display
   display(): string;
 
+  // evaluates the current expression
+  evaluate(): string;
+
 }
